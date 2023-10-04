@@ -11,7 +11,7 @@ const GeneralApp = () => {
     <Stack direction={"row"} sx={{ width: "100%" }}>
       {/* Chats */}
       <Chats />
-      <Box sx={{ height: "100%", width: "calc(100vw - 450px)", backgroundColor: theme.palette.mode === "light" ? "#fff" : theme.palette.background.default }}>
+      <Box sx={{ height: "100%", width: "calc(100vw - 450px)", backgroundColor: theme.palette.mode === "light" ? "#F0F4FA" : theme.palette.background.paper }}>
         {/* Conversation */}
         <Conversation />
       </Box>

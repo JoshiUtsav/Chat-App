@@ -41,7 +41,7 @@ const ChatsElement = ({ id, img, name, msg, time, unread, online }) => {
         <Box sx={{
             width: '100%',
             borderRadius: 1,
-            backgroundColor: theme.palette.mode === "light" ? '#fff' : theme.palette.background.default,
+            backgroundColor: theme.palette.mode === "light" ? '#fff' : theme.palette.background.paper,
         }} p={2}>
             <Stack direction="row" alignItems={"center"} justifyContent="space-between">
                 <Stack direction="row" spacing={2} alignItems={"center"}>
@@ -99,7 +99,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Chats = () => {
     const theme = useTheme();
     return (
-        <Box sx={{ position: "relative", width: 350, backgroundColor: theme.palette.mode === "light" ? "#F8FAFF" : theme.palette.background.paper, boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.25)" }}>
+        <Box sx={{ position: "relative", width: 350, backgroundColor: theme.palette.mode === "light" ? "#F0F4FA" : theme.palette.background.default, boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.25)" }}>
             <Stack p={2} spacing={2} sx={{ height: "100vh" }}>
                 <Stack direction="row" alignItems={"center"} justifyContent={"space-between"}>
                     <Typography variant='h5'>Chats</Typography>
