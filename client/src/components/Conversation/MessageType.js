@@ -1,8 +1,8 @@
 import React from 'react'
-import { Box, Divider, Stack, Typography, Link, IconButton } from '@mui/material'
+import { Box, Divider, Stack, Typography, Link, IconButton, Menu, MenuItem } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { DownloadSimple, Image } from 'phosphor-react';
-
+import { DotsThreeVertical, DownloadSimple, Image } from 'phosphor-react';
+import { Message_options } from '../../data';
 
 const DocMessage = ({ el }) => {
     const theme = useTheme();
@@ -20,6 +20,9 @@ const DocMessage = ({ el }) => {
                     <Typography variant='body2' color={el.incoming ? theme.palette.text : "#fff"}>{el.message}</Typography>
                 </Stack>
             </Box>
+            <Stack ml={2} alignItems={"center"} justifyContent={"center"}>
+                <MessageOption />
+            </Stack>
         </Stack>
     )
 }
@@ -40,6 +43,9 @@ const LinkMessage = ({ el }) => {
                     </Stack>
                 </Stack>
             </Box>
+            <Stack ml={2} alignItems={"center"} justifyContent={"normal"}>
+                <MessageOption />
+            </Stack>
         </Stack>
     )
 }
@@ -56,6 +62,9 @@ const ReplyMessage = ({ el }) => {
                     <Typography variant='body2' color={el.incoming ? theme.palette.text : "#fff"}>{el.reply}</Typography>
                 </Stack>
             </Box>
+            <Stack ml={2} alignItems={"center"} justifyContent={"center"}>
+                <MessageOption />
+            </Stack>
         </Stack>
     )
 }
@@ -70,6 +79,9 @@ const ImageType = ({ el }) => {
                     <Typography variant='body2' color={el.incoming ? theme.palette.text : "#fff"} >{el.message}</Typography>
                 </Stack>
             </Box>
+            <Stack ml={2} alignItems={"center"} justifyContent={"normal"}>
+                <MessageOption />
+            </Stack>
         </Stack >
     )
 }
@@ -81,6 +93,9 @@ const TextMessage = ({ el }) => {
             <Box p={1.5} sx={{ backgroundColor: el.incoming ? theme.palette.background.default : theme.palette.primary.main, borderRadius: 1.5, width: "max-content" }}>
                 <Typography variant='body2' color={el.incoming ? theme.palette.text : "#fff"}>{el.message}</Typography>
             </Box>
+            <Stack ml={2} alignItems={"center"} justifyContent={"center"}>
+                <MessageOption />
+            </Stack>
         </Stack>
     )
 }
@@ -95,5 +110,44 @@ const Timeline = ({ el }) => {
         </Stack>
     )
 }
+
+const MessageOption = () => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    return (
+        <>
+            <DotsThreeVertical
+                size={20}
+                id="basic-button"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+            />
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                }}
+            >
+                <Stack spacing={1} px={1}>
+                    {Message_options.map((el) => (
+                        <MenuItem onClick={handleClick}>{el.title}</MenuItem>
+                    ))}
+                </Stack>
+            </Menu>
+        </>
+    )
+}
+
 
 export { Timeline, TextMessage, ImageType, ReplyMessage, LinkMessage, DocMessage }
