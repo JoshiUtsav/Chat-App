@@ -16,7 +16,16 @@ const GeneralApp = () => {
     <Stack direction={"row"} sx={{ width: "100%" }}>
       {/* Chats */}
       <Chats />
-      <Box sx={{ height: "100%", width: sidebar.open ? "calc(100vw - 770px)" : "calc(100vw - 450px)", backgroundColor: theme.palette.mode === "light" ? "#F0F4FA" : theme.palette.background.paper }}>
+      <Box
+        sx={{
+          height: "100%",
+          width: sidebar.open ? "calc(100vw - 770px)" : "calc(100vw - 450px)",
+          backgroundColor:
+            theme.palette.mode === "light"
+              ? "#F0F4FA"
+              : theme.palette.background.paper,
+        }}
+      >
         {/* Conversation */}
         <Conversation />
       </Box>
@@ -43,7 +52,6 @@ const GeneralApp = () => {
               );
           }
         })()}
-
     </Stack>
   );
 };

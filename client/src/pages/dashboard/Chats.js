@@ -1,35 +1,45 @@
-import React from 'react';
-import { Box, Typography, Stack, IconButton, InputBase, Button, Divider, Avatar, Badge } from '@mui/material';
+import React from "react";
+import {
+    Box,
+    Typography,
+    Stack,
+    IconButton,
+    InputBase,
+    Button,
+    Divider,
+    Avatar,
+    Badge,
+} from "@mui/material";
 import { styled, alpha, useTheme } from "@mui/material/styles";
-import { ArchiveBox, CircleDashed, MagnifyingGlass } from 'phosphor-react';
-import { faker } from '@faker-js/faker';
-import { ChatList } from '../../data';
-import { SimpleBarStyle } from '../../components/Scrollbar.js';
+import { ArchiveBox, CircleDashed, MagnifyingGlass } from "phosphor-react";
+import { faker } from "@faker-js/faker";
+import { ChatList } from "../../data";
+import { SimpleBarStyle } from "../../components/Scrollbar.js"; // Import the SimpleBarStyle component
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
-    '& .MuiBadge-badge': {
-        backgroundColor: '#44b700',
-        color: '#44b700',
+    "& .MuiBadge-badge": {
+        backgroundColor: "#44b700",
+        color: "#44b700",
         boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-        '&::after': {
-            position: 'absolute',
+        "&::after": {
+            position: "absolute",
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            animation: 'ripple 1.2s infinite ease-in-out',
-            border: '1px solid currentColor',
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
+            animation: "ripple 1.2s infinite ease-in-out",
+            border: "1px solid currentColor",
             content: '""',
         },
     },
-    '@keyframes ripple': {
-        '0%': {
-            transform: 'scale(.8)',
+    "@keyframes ripple": {
+        "0%": {
+            transform: "scale(.8)",
             opacity: 1,
         },
-        '100%': {
-            transform: 'scale(2.4)',
+        "100%": {
+            transform: "scale(2.4)",
             opacity: 0,
         },
     },
@@ -38,35 +48,49 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const ChatsElement = ({ id, img, name, msg, time, unread, online }) => {
     const theme = useTheme();
     return (
-        <Box sx={{
-            width: '100%',
-            borderRadius: 1,
-            backgroundColor: theme.palette.mode === "light" ? '#fff' : theme.palette.background.paper,
-        }} p={2}>
-            <Stack direction="row" alignItems={"center"} justifyContent="space-between">
+        <Box
+            sx={{
+                width: "100%",
+                borderRadius: 1,
+                backgroundColor:
+                    theme.palette.mode === "light"
+                        ? "#fff"
+                        : theme.palette.background.default,
+            }}
+            p={2}
+        >
+            <Stack
+                direction="row"
+                alignItems={"center"}
+                justifyContent="space-between"
+            >
                 <Stack direction="row" spacing={2} alignItems={"center"}>
-                    {online ? <StyledBadge
-                        overlap="circular"
-                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                        variant="dot"
-                    >
+                    {online ? (
+                        <StyledBadge
+                            overlap="circular"
+                            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                            variant="dot"
+                        >
+                            <Avatar alt="dp" src={faker.image.avatar()} />
+                        </StyledBadge>
+                    ) : (
                         <Avatar alt="dp" src={faker.image.avatar()} />
-                    </StyledBadge>
-                        :
-                        <Avatar alt="dp" src={faker.image.avatar()} />}
+                    )}
                     <Stack spacing={0.3}>
-                        <Typography variant='subtitle2'>{name}</Typography>
-                        <Typography variant='caption'>{msg}</Typography>
+                        <Typography variant="subtitle2">{name}</Typography>
+                        <Typography variant="caption">{msg}</Typography>
                     </Stack>
                 </Stack>
                 <Stack spacing={2} alignItems={"center"} justifyContent={"center"}>
-                    <Typography sx={{ fontWeight: 600 }} variant='caption'>{time}</Typography>
-                    <Badge color='primary' badgeContent={unread}></Badge>
+                    <Typography sx={{ fontWeight: 600 }} variant="caption">
+                        {time}
+                    </Typography>
+                    <Badge color="primary" badgeContent={unread}></Badge>
                 </Stack>
             </Stack>
         </Box>
-    )
-}
+    );
+};
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -93,25 +117,43 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         width: "100%",
-    }
+    },
 }));
 
 const Chats = () => {
     const theme = useTheme();
     return (
-        <Box sx={{ position: "relative", width: 350, backgroundColor: theme.palette.mode === "light" ? "#F0F4FA" : theme.palette.background.default, boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.25)" }}>
+        <Box
+            sx={{
+                position: "relative",
+                width: 350,
+                backgroundColor:
+                    theme.palette.mode === "light"
+                        ? "#F0F4FA"
+                        : theme.palette.background.default,
+                boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.25)",
+            }}
+        >
             <Stack p={2} spacing={2} sx={{ height: "100vh" }}>
-                <Stack direction="row" alignItems={"center"} justifyContent={"space-between"}>
-                    <Typography variant='h5'>Chats</Typography>
-                    <IconButton><CircleDashed /></IconButton>
+                <Stack
+                    direction="row"
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                >
+                    <Typography variant="h5">Chats</Typography>
+                    <IconButton>
+                        <CircleDashed />
+                    </IconButton>
                 </Stack>
                 <Stack sx={{ width: "100%" }}>
                     <Search>
                         <SearchIconWrapper>
-                            <MagnifyingGlass color='#709CE6' />
+                            <MagnifyingGlass color="#709CE6" />
                         </SearchIconWrapper>
-                        <StyledInputBase placeholder="Search..."
-                        inputProps={{ "aria-label": "search"}} />
+                        <StyledInputBase
+                            placeholder="Search..."
+                            inputProps={{ "aria-label": "search" }}
+                        />
                     </Search>
                 </Stack>
                 <Stack spacing={1}>
@@ -121,21 +163,34 @@ const Chats = () => {
                     </Stack>
                     <Divider />
                 </Stack>
-                <Stack spacing={1} direction={'column'} sx={{ flexGrow: 1, overflowY: "auto", height: "100%" }}>
+                <Stack
+                    spacing={1}
+                    direction={"column"}
+                    sx={{ flexGrow: 1, overflowY: "auto", height: "100%" }}
+                >
+                    {/* Wrap the content with the SimpleBarStyle component for custom scrollbar */}
                     <SimpleBarStyle timeout={500} clickOnTrack={false}>
                         <Stack spacing={2.4} mb={2}>
-                            <Typography variant='subtitle2' sx={{ color: "#676767" }}>Pinned</Typography>
-                            {ChatList.filter((el) => el.pinned).map((el) => { return <ChatsElement {...el} /> })}
+                            <Typography variant="subtitle2" sx={{ color: "#676767" }}>
+                                Pinned
+                            </Typography>
+                            {ChatList.filter((el) => el.pinned).map((el) => {
+                                return <ChatsElement {...el} />;
+                            })}
                         </Stack>
                         <Stack spacing={2.4}>
-                            <Typography variant='subtitle2' sx={{ color: "#676767" }}>All Chats</Typography>
-                            {ChatList.filter((el) => !el.pinned).map((el) => { return <ChatsElement {...el} /> })}
+                            <Typography variant="subtitle2" sx={{ color: "#676767" }}>
+                                All Chats
+                            </Typography>
+                            {ChatList.filter((el) => !el.pinned).map((el) => {
+                                return <ChatsElement {...el} />;
+                            })}
                         </Stack>
                     </SimpleBarStyle>
                 </Stack>
             </Stack>
         </Box>
-    )
-}
+    );
+};
 
 export default Chats;
